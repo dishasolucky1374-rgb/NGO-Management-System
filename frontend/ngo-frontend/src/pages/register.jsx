@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function Login() {
+function Register() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
+    phone: "",
     password: "",
+    confirmPassword: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -24,184 +27,190 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.email || !formData.password) {
-      setError("Please enter your email and password.");
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.password ||
+      !formData.confirmPassword
+    ) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match.");
       return;
     }
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: formData.email,
-            password: formData.password,
-          }),
-        }
-      );
+      setLoading(true);
+
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          password: formData.password,
+        }),
+      });
 
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message);
+        setError(data.message || "Registration failed.");
         return;
       }
 
-      // Save login information
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("userName", data.user.name);
-      localStorage.setItem("userEmail", data.user.email);
-      localStorage.setItem("userId", data.user.id);
+      alert("Account created successfully!");
 
-      alert("Login successful!");
-
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.error(error);
-      setError("Unable to connect to the server.");
+      setError(
+        "Unable to connect to the server. Please make sure the backend is running."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="login-page">
+    <div className="register-page">
 
       {/* LEFT SIDE */}
-      <div className="login-info">
+      <div className="register-info">
 
-        <Link to="/" className="login-logo">
+        <Link to="/" className="register-logo">
           NGO<span>.</span>
         </Link>
 
-        <div className="login-info-content">
-          <span>WELCOME BACK</span>
+        <div className="register-info-content">
+          <span>JOIN OUR COMMUNITY</span>
 
           <h1>
-            Together,
+            Be Part of
             <br />
-            <strong>We Create Change.</strong>
+            <strong>Something Bigger.</strong>
           </h1>
 
           <p>
-            Sign in to stay connected with our initiatives,
-            volunteer opportunities, campaigns and impact.
+            Create an account to stay connected with our work,
+            volunteer opportunities, campaigns and community initiatives.
           </p>
         </div>
 
       </div>
 
       {/* RIGHT SIDE */}
-      <div className="login-form-section">
+      <div className="register-form-section">
 
-        <div className="login-card">
+        <div className="register-card">
 
-          <span className="section-tag">ACCOUNT LOGIN</span>
+          <span className="section-tag">CREATE ACCOUNT</span>
 
-          <h2>Welcome Back</h2>
+          <h2>Join Us</h2>
 
-          <p className="login-subtitle">
-            Sign in to your account to continue.
+          <p className="register-subtitle">
+            Create your account and become part of our community.
           </p>
 
-          {/* ERROR MESSAGE */}
           {error && (
-            <div className="login-error">
+            <div className="register-error">
               {error}
             </div>
           )}
 
           <form onSubmit={handleSubmit}>
 
-            {/* EMAIL */}
+            {/* NAME */}
             <div className="form-group">
-
-              <label htmlFor="email">
-                Email Address
-              </label>
+              <label>Full Name *</label>
 
               <input
-                id="email"
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            {/* EMAIL */}
+            <div className="form-group">
+              <label>Email Address *</label>
+
+              <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
               />
+            </div>
 
+            {/* PHONE */}
+            <div className="form-group">
+              <label>Phone Number</label>
+
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Enter your phone number"
+              />
             </div>
 
             {/* PASSWORD */}
             <div className="form-group">
+              <label>Password *</label>
 
-              <label htmlFor="password">
-                Password
-              </label>
-
-              <div className="password-wrapper">
-
-                <input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Enter your password"
-                />
-
-                <button
-                  type="button"
-                  className="show-password"
-                  onClick={() =>
-                    setShowPassword(!showPassword)
-                  }
-                >
-                  {showPassword ? "Hide" : "Show"}
-                </button>
-
-              </div>
-
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Create a password"
+              />
             </div>
 
-            {/* OPTIONS */}
-            <div className="login-options">
+            {/* CONFIRM PASSWORD */}
+            <div className="form-group">
+              <label>Confirm Password *</label>
 
-              <label>
-                <input type="checkbox" />
-                Remember me
-              </label>
-
-              <Link to="/forgot-password">
-                Forgot Password?
-              </Link>
-
+              <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Confirm your password"
+              />
             </div>
 
             {/* SUBMIT */}
             <button
               type="submit"
-              className="login-submit"
+              className="register-submit"
+              disabled={loading}
             >
-              Sign In →
+              {loading ? "Creating Account..." : "Create Account →"}
             </button>
 
           </form>
 
-          {/* REGISTER */}
-          <div className="login-register">
-
+          <div className="register-login">
             <p>
-              Don't have an account?{" "}
-              <Link to="/register">
-                Create an account
+              Already have an account?{" "}
+              <Link to="/login">
+                Sign In
               </Link>
             </p>
-
           </div>
 
-          {/* BACK HOME */}
           <Link to="/" className="back-home">
             ← Back to Website
           </Link>
@@ -214,4 +223,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
