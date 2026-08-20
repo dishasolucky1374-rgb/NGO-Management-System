@@ -3,7 +3,8 @@ const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
-// REGISTER
+// ==================== REGISTER ====================
+
 router.post("/register", (req, res) => {
   const { name, email, phone, password } = req.body;
 
@@ -29,34 +30,42 @@ router.post("/register", (req, res) => {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-    const sql = `
-      INSERT INTO users (name, email, password)
-      VALUES (?, ?, ?)
-    `;
+      const sql = `
+        INSERT INTO users (name, email, phone, password)
+        VALUES (?, ?, ?, ?)
+      `;
 
-    req.app.locals.db.query(
-      sql,
-      [name, email, hashedPassword],
-      (err, result) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).json({
-            message: "Registration failed."
+      req.app.locals.db.query(
+        sql,
+        [name, email, phone || null, hashedPassword],
+        (err, result) => {
+          if (err) {
+            console.error(err);
+            return res.status(500).json({
+              message: "Registration failed."
+            });
+          }
+
+          res.status(201).json({
+            message: "Account created successfully!"
           });
         }
-
-        res.status(201).json({
-          message: "Account created successfully!"
-        });
-      }
-    );
+      );
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Registration failed."
+      });
+    }
   });
 });
 
 
-// LOGIN
+// ==================== LOGIN ====================
+
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
 
@@ -84,25 +93,33 @@ router.post("/login", (req, res) => {
 
     const user = results[0];
 
-    const passwordMatch = await bcrypt.compare(
-      password,
-      user.password
-    );
+    try {
+      const passwordMatch = await bcrypt.compare(
+        password,
+        user.password
+      );
 
-    if (!passwordMatch) {
-      return res.status(401).json({
-        message: "Invalid email or password."
+      if (!passwordMatch) {
+        return res.status(401).json({
+          message: "Invalid email or password."
+        });
+      }
+
+      res.json({
+        message: "Login successful!",
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          phone: user.phone
+        }
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Login failed."
       });
     }
-
-    res.json({
-      message: "Login successful!",
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email
-      }
-    });
   });
 });
 
