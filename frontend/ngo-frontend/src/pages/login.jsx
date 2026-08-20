@@ -11,6 +11,7 @@ function Login() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -30,39 +31,40 @@ function Login() {
     }
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: formData.email,
-            password: formData.password,
-          }),
-        }
-      );
+      setLoading(true);
+
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
 
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message);
+        setError(data.message || "Login failed.");
         return;
       }
 
       // Save login information
       localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("userName", data.user.name);
-      localStorage.setItem("userEmail", data.user.email);
-      localStorage.setItem("userId", data.user.id);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
       alert("Login successful!");
 
-      navigate("/");
+      navigate("/account");
     } catch (error) {
       console.error(error);
-      setError("Unable to connect to the server.");
+      setError(
+        "Unable to connect to the server. Please make sure the backend is running."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -106,7 +108,6 @@ function Login() {
             Sign in to your account to continue.
           </p>
 
-          {/* ERROR MESSAGE */}
           {error && (
             <div className="login-error">
               {error}
@@ -117,7 +118,6 @@ function Login() {
 
             {/* EMAIL */}
             <div className="form-group">
-
               <label htmlFor="email">
                 Email Address
               </label>
@@ -130,12 +130,10 @@ function Login() {
                 onChange={handleChange}
                 placeholder="Enter your email"
               />
-
             </div>
 
             {/* PASSWORD */}
             <div className="form-group">
-
               <label htmlFor="password">
                 Password
               </label>
@@ -162,7 +160,6 @@ function Login() {
                 </button>
 
               </div>
-
             </div>
 
             {/* OPTIONS */}
@@ -183,22 +180,21 @@ function Login() {
             <button
               type="submit"
               className="login-submit"
+              disabled={loading}
             >
-              Sign In →
+              {loading ? "Signing In..." : "Sign In →"}
             </button>
 
           </form>
 
           {/* REGISTER */}
           <div className="login-register">
-
             <p>
               Don't have an account?{" "}
               <Link to="/register">
                 Create an account
               </Link>
             </p>
-
           </div>
 
           {/* BACK HOME */}
