@@ -32,6 +32,12 @@ app.locals.db = db;
 // Authentication routes
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
+// Banner routes
+const bannerRoutes = require("./routes/banners");
+app.use("/api/banners", bannerRoutes);
+// Vision and Mission routes
+const visionMissionRoutes = require("./routes/visionMission");
+app.use("/api/vision-mission", visionMissionRoutes);
 
 app.get("/", (req, res) => {
   res.send("NGO Backend is Running!");
@@ -42,3 +48,10 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
+// Statistics routes
+const statisticsRoutes = require("./routes/statistics");
+app.use("/api/statistics", statisticsRoutes);
+
+// Initiative routes
+const initiativesRoutes = require("./routes/initiatives");
+app.use("/api/initiatives", initiativesRoutes);
