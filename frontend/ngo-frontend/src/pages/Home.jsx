@@ -1,12 +1,50 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Home() {
+  const [banners, setBanners] = useState([]);
+  const [statistics, setStatistics] = useState([]);
+  const [visionMission, setVisionMission] = useState(null);
+  const [initiatives, setInitiatives] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/banners")
+      .then((res) => res.json())
+      .then((data) => setBanners(data))
+      .catch((err) => console.error("Banner error:", err));
+
+    fetch("http://localhost:5000/api/statistics")
+      .then((res) => res.json())
+      .then((data) => setStatistics(data))
+      .catch((err) => console.error("Statistics error:", err));
+
+    fetch("http://localhost:5000/api/vision-mission")
+      .then((res) => res.json())
+      .then((data) => setVisionMission(data[0] || null))
+      .catch((err) => console.error("Vision/Mission error:", err));
+
+    fetch("http://localhost:5000/api/initiatives")
+      .then((res) => res.json())
+      .then((data) => setInitiatives(data))
+      .catch((err) => console.error("Initiatives error:", err));
+  }, []);
+
   return (
     <main>
 
       {/* Hero Section */}
-      <section className="hero">
-
+      <section
+        className="hero"
+        style={
+          banners[0]?.image_url
+            ? {
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url(${banners[0].image_url})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center"
+              }
+            : {}
+        }
+      >
         <div className="hero-content">
 
           <p className="hero-label">
@@ -14,15 +52,14 @@ function Home() {
           </p>
 
           <h1>
-            Empowering Lives.
+            {banners[0]?.title || "Empowering Lives."}
             <br />
             Building Futures.
           </h1>
 
           <p>
-            We work with children, women, and communities to create
-            opportunities through education, healthcare, and livelihood
-            programs.
+            {banners[0]?.description ||
+              "We work with children, women, and communities to create opportunities through education, healthcare, and livelihood programs."}
           </p>
 
           <div className="hero-buttons">
@@ -38,7 +75,6 @@ function Home() {
           </div>
 
         </div>
-
       </section>
 
 
@@ -52,52 +88,52 @@ function Home() {
 
         <div className="stats-grid">
 
-          <div className="stat-card">
-            <h3>10,000+</h3>
-            <p>Children Reached</p>
-          </div>
-
-          <div className="stat-card">
-            <h3>5,000+</h3>
-            <p>Women Empowered</p>
-          </div>
-
-          <div className="stat-card">
-            <h3>50+</h3>
-            <p>Communities Served</p>
-          </div>
-
-          <div className="stat-card">
-            <h3>100+</h3>
-            <p>Active Volunteers</p>
-          </div>
+          {statistics.map((stat) => (
+            <div className="stat-card" key={stat.id}>
+              <h3>{stat.value}</h3>
+              <p>{stat.label}</p>
+            </div>
+          ))}
 
         </div>
 
       </section>
 
 
-      {/* Mission */}
-      <section className="mission-section">
+      {/* Vision and Mission */}
+      <section className="vision-mission-section">
 
-        <div>
+        <div className="vision-card">
+
+          <p className="section-label">OUR VISION</p>
+
+          <h2>
+            {visionMission?.vision_title}
+          </h2>
+
+          <p>
+            {visionMission?.vision_description}
+          </p>
+
+        </div>
+
+
+        <div className="mission-card">
+
           <p className="section-label">OUR MISSION</p>
 
           <h2>
-            Creating lasting impact in communities that need it most.
+            {visionMission?.mission_title}
           </h2>
-        </div>
 
-        <div>
           <p>
-            Our mission is to create a lasting impact in the lives of
-            underprivileged children and communities by providing
-            education, women empowerment, and livelihood opportunities.
+            {visionMission?.mission_description}
           </p>
 
           <Link to="/about" className="text-link">
             Learn More →
           </Link>
+
         </div>
 
       </section>
@@ -113,31 +149,190 @@ function Home() {
 
         <div className="program-grid">
 
-          <div className="program-card">
-            <h3>Education</h3>
+          {initiatives.map((initiative) => (
+            <div className="program-card" key={initiative.id}>
+
+              <h3>{initiative.title}</h3>
+
+              <p>
+                {initiative.description}
+              </p>
+
+              <Link to="/our-work">
+                Learn More →
+              </Link>
+
+            </div>
+          ))}
+
+        </div>
+
+      </section>
+
+
+      {/* Success Stories */}
+      <section className="success-stories">
+
+        <div className="section-heading">
+          <p>SUCCESS STORIES</p>
+          <h2>Changing Lives, Creating Hope</h2>
+        </div>
+
+        <div className="story-container">
+
+          <div className="story-card">
+
+            <h3>Education for a Better Future</h3>
+
             <p>
-              Providing quality education and learning opportunities
-              to underprivileged children.
+              Through our education initiatives, children receive
+              learning opportunities, resources, and support to
+              continue building a brighter future.
             </p>
-            <Link to="/our-work">Learn More →</Link>
+
           </div>
 
-          <div className="program-card">
-            <h3>Healthcare</h3>
+
+          <div className="story-card">
+
+            <h3>Empowering Women</h3>
+
             <p>
-              Improving access to healthcare through health camps
-              and community-based interventions.
+              Our women empowerment programs provide opportunities
+              for skill development, independence, and sustainable
+              livelihoods.
             </p>
-            <Link to="/our-work">Learn More →</Link>
+
           </div>
 
-          <div className="program-card">
-            <h3>Livelihood</h3>
+
+          <div className="story-card">
+
+            <h3>Supporting Communities</h3>
+
             <p>
-              Creating sustainable livelihood opportunities through
-              vocational training and skill development.
+              Through community initiatives and the support of
+              volunteers, we continue to create meaningful and
+              positive social change.
             </p>
-            <Link to="/our-work">Learn More →</Link>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* Latest News and Events */}
+      <section className="news-events">
+
+        <div className="section-heading">
+          <p>NEWS & EVENTS</p>
+          <h2>Latest Updates</h2>
+        </div>
+
+        <div className="news-container">
+
+          <div className="news-card">
+
+            <h3>Community Awareness Campaign</h3>
+
+            <p>
+              Join our awareness initiatives and help us spread
+              knowledge and create positive social change.
+            </p>
+
+          </div>
+
+
+          <div className="news-card">
+
+            <h3>Volunteer Drive</h3>
+
+            <p>
+              We are welcoming passionate volunteers who want to
+              contribute their time and skills to meaningful causes.
+            </p>
+
+          </div>
+
+
+          <div className="news-card">
+
+            <h3>Community Development Program</h3>
+
+            <p>
+              Our latest initiatives focus on supporting communities
+              and creating opportunities for sustainable development.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* Partners and Supporters */}
+      <section className="partners">
+
+        <div className="section-heading">
+          <p>OUR PARTNERS</p>
+          <h2>Our Partners & Supporters</h2>
+        </div>
+
+        <p className="partners-description">
+          Together with our supporters and community partners,
+          we work towards creating a positive and lasting impact.
+        </p>
+
+        <div className="partners-container">
+
+          <div className="partner-card">
+            Community Partners
+          </div>
+
+          <div className="partner-card">
+            Social Supporters
+          </div>
+
+          <div className="partner-card">
+            Volunteer Network
+          </div>
+
+          <div className="partner-card">
+            Development Partners
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* Call to Action */}
+      <section className="cta-section">
+
+        <div>
+
+          <h2>
+            Together, We Can Make a Difference
+          </h2>
+
+          <p>
+            Join us in creating positive change and building
+            a better future for communities.
+          </p>
+
+          <div className="hero-buttons">
+
+            <Link to="/donate" className="primary-btn">
+              Donate Now
+            </Link>
+
+            <Link to="/get-involved" className="secondary-btn">
+              Get Involved
+            </Link>
+
           </div>
 
         </div>
@@ -149,6 +344,3 @@ function Home() {
 }
 
 export default Home;
-
-
-
