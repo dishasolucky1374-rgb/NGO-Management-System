@@ -8,22 +8,22 @@ function Home() {
   const [initiatives, setInitiatives] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/banners")
+    fetch("https://ngo-management-backend.onrender.com/api/banners")
       .then((res) => res.json())
       .then((data) => setBanners(data))
       .catch((err) => console.error("Banner error:", err));
 
-    fetch("http://localhost:5000/api/statistics")
+    fetch("https://ngo-management-backend.onrender.com/api/statistics")
       .then((res) => res.json())
       .then((data) => setStatistics(data))
       .catch((err) => console.error("Statistics error:", err));
 
-    fetch("http://localhost:5000/api/vision-mission")
+    fetch("https://ngo-management-backend.onrender.com/api/vision-mission")
       .then((res) => res.json())
       .then((data) => setVisionMission(data[0] || null))
       .catch((err) => console.error("Vision/Mission error:", err));
 
-    fetch("http://localhost:5000/api/initiatives")
+    fetch("https://ngo-management-backend.onrender.com/api/initiatives")
       .then((res) => res.json())
       .then((data) => setInitiatives(data))
       .catch((err) => console.error("Initiatives error:", err));
