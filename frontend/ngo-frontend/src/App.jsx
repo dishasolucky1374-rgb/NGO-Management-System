@@ -14,7 +14,8 @@ import Donate from "./pages/donate";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Account from "./pages/Account";
-
+import GetInvolved from "./pages/GetInvolved";
+import Blog from "./pages/Blog";
 function App() {
   return (
     <BrowserRouter>
