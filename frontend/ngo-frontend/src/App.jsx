@@ -6,15 +6,13 @@ import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
-import OurWork from "./pages/OurWork";
-import Projects from "./pages/Projects";
-import Media from "./pages/Media";
-import GetInvolved from "./pages/GetInvolved";
-import Blog from "./pages/Blog";
-import Contact from "./pages/Contact";
-import Donate from "./pages/Donate";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import OurWork from "./pages/Ourwork";
+import Projects from "./pages/projects";
+import Media from "./pages/media";
+import Contact from "./pages/contact";
+import Donate from "./pages/donate";
+import Login from "./pages/login";
+import Register from "./pages/register";
 import Account from "./pages/Account";
 
 function App() {
