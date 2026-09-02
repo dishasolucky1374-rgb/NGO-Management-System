@@ -7,7 +7,10 @@ function Projects() {
       status: "Ongoing",
       description:
         "Supporting children from underserved communities with educational resources, learning support, and opportunities for a better future.",
+      image:
+        "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80",
     },
+
     {
       title: "Community Health Initiative",
       category: "Healthcare",
@@ -15,7 +18,10 @@ function Projects() {
       status: "Ongoing",
       description:
         "Providing community-based healthcare support, awareness programs, and health camps for underserved communities.",
+      image:
+        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80",
     },
+
     {
       title: "Women Skill Development",
       category: "Women Empowerment",
@@ -23,7 +29,10 @@ function Projects() {
       status: "Completed",
       description:
         "Helping women develop practical skills and access livelihood opportunities to become financially independent.",
+      image:
+        "https://images.unsplash.com/photo-1594708767771-a7502209ff51?auto=format&fit=crop&w=900&q=80",
     },
+
     {
       title: "Digital Learning Program",
       category: "Education",
@@ -31,7 +40,10 @@ function Projects() {
       status: "Ongoing",
       description:
         "Promoting digital learning and improving access to educational technology for students in rural communities.",
+      image:
+        "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80",
     },
+
     {
       title: "Livelihood Development",
       category: "Livelihood",
@@ -39,7 +51,10 @@ function Projects() {
       status: "Ongoing",
       description:
         "Supporting marginalized communities through vocational training, skill development, and livelihood generation.",
+      image:
+        "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=80",
     },
+
     {
       title: "Community Awareness Drive",
       category: "Community",
@@ -47,67 +62,65 @@ function Projects() {
       status: "Completed",
       description:
         "Creating awareness about education, healthcare, women's rights, and community development.",
+      image:
+        "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=900&q=80",
     },
   ];
 
   return (
     <main>
-
-      {/* Hero */}
+      {/* ================= HERO ================= */}
       <section className="page-hero">
         <div>
           <p>OUR INITIATIVES</p>
-
           <h1>Projects</h1>
-
           <span>
-            Discover the initiatives creating meaningful change
-            across communities.
+            Discover the initiatives creating meaningful change across
+            communities.
           </span>
         </div>
       </section>
 
-
-      {/* Introduction */}
+      {/* ================= INTRODUCTION ================= */}
       <section className="projects-intro">
-
         <p className="section-label">OUR PROJECTS</p>
 
         <h2>Turning ideas into measurable impact.</h2>
 
         <p>
-          From education and healthcare to women empowerment and
-          livelihood development, our projects focus on creating
-          sustainable opportunities for communities.
+          From education and healthcare to women empowerment and livelihood
+          development, our projects focus on creating sustainable
+          opportunities for communities.
         </p>
-
       </section>
 
-
-      {/* Project Grid */}
+      {/* ================= PROJECT GRID ================= */}
       <section className="projects-section">
-
         {projects.map((project, index) => (
-
           <article className="project-card" key={index}>
-
+            
+            {/* PROJECT IMAGE */}
             <div className="project-image">
+              <img
+                src={project.image}
+                alt={project.title}
+              />
+
               <div className="project-category">
                 {project.category}
               </div>
             </div>
 
+            {/* PROJECT CONTENT */}
             <div className="project-content">
-
+              
               <div className="project-status">
                 {project.status}
               </div>
 
               <h2>{project.title}</h2>
 
-              <p>
-                {project.description}
-              </p>
+              <p>{project.description}</p>
 
               <div className="project-location">
                 📍 {project.location}
@@ -116,29 +129,20 @@ function Projects() {
               <button className="project-btn">
                 View Project
               </button>
-
             </div>
-
           </article>
-
         ))}
-
       </section>
 
-
-      {/* Project Impact */}
+      {/* ================= PROJECT IMPACT ================= */}
       <section className="project-impact">
-
         <div className="section-heading">
-
           <p>PROJECT IMPACT</p>
 
           <h2>Every project starts with a purpose.</h2>
-
         </div>
 
         <div className="project-stats">
-
           <div>
             <strong>25+</strong>
             <span>Projects</span>
@@ -158,15 +162,11 @@ function Projects() {
             <strong>100+</strong>
             <span>Volunteers</span>
           </div>
-
         </div>
-
       </section>
 
-
-      {/* CTA */}
+      {/* ================= CTA ================= */}
       <section className="about-cta">
-
         <h2>Want to support a project?</h2>
 
         <p>
@@ -176,9 +176,7 @@ function Projects() {
         <a href="/donate" className="primary-btn">
           Support Our Work
         </a>
-
       </section>
-
     </main>
   );
 }
