@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import "./Home.css";
 
 function Home() {
   const [banners, setBanners] = useState([]);
@@ -40,7 +41,7 @@ function Home() {
             ? {
                 backgroundImage: `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url(${banners[0].image_url})`,
                 backgroundSize: "cover",
-                backgroundPosition: "center"
+                backgroundPosition: "center",
               }
             : {}
         }
@@ -63,7 +64,6 @@ function Home() {
           </p>
 
           <div className="hero-buttons">
-
             <Link to="/donate" className="primary-btn">
               Donate Now
             </Link>
@@ -71,7 +71,6 @@ function Home() {
             <Link to="/our-work" className="secondary-btn">
               Explore Our Work
             </Link>
-
           </div>
 
         </div>
@@ -87,14 +86,12 @@ function Home() {
         </div>
 
         <div className="stats-grid">
-
           {statistics.map((stat) => (
             <div className="stat-card" key={stat.id}>
               <h3>{stat.value}</h3>
               <p>{stat.label}</p>
             </div>
           ))}
-
         </div>
 
       </section>
@@ -105,7 +102,9 @@ function Home() {
 
         <div className="vision-card">
 
-          <p className="section-label">OUR VISION</p>
+          <p className="section-label">
+            OUR VISION
+          </p>
 
           <h2>
             {visionMission?.vision_title}
@@ -120,7 +119,9 @@ function Home() {
 
         <div className="mission-card">
 
-          <p className="section-label">OUR MISSION</p>
+          <p className="section-label">
+            OUR MISSION
+          </p>
 
           <h2>
             {visionMission?.mission_title}
@@ -150,9 +151,13 @@ function Home() {
         <div className="program-grid">
 
           {initiatives.map((initiative) => (
-            <div className="program-card" key={initiative.id}>
-
-              <h3>{initiative.title}</h3>
+            <div
+              className="program-card"
+              key={initiative.id}
+            >
+              <h3>
+                {initiative.title}
+              </h3>
 
               <p>
                 {initiative.description}
@@ -161,7 +166,6 @@ function Home() {
               <Link to="/our-work">
                 Learn More →
               </Link>
-
             </div>
           ))}
 
@@ -181,41 +185,41 @@ function Home() {
         <div className="story-container">
 
           <div className="story-card">
-
-            <h3>Education for a Better Future</h3>
+            <h3>
+              Education for a Better Future
+            </h3>
 
             <p>
               Through our education initiatives, children receive
               learning opportunities, resources, and support to
               continue building a brighter future.
             </p>
-
           </div>
 
 
           <div className="story-card">
-
-            <h3>Empowering Women</h3>
+            <h3>
+              Empowering Women
+            </h3>
 
             <p>
               Our women empowerment programs provide opportunities
               for skill development, independence, and sustainable
               livelihoods.
             </p>
-
           </div>
 
 
           <div className="story-card">
-
-            <h3>Supporting Communities</h3>
+            <h3>
+              Supporting Communities
+            </h3>
 
             <p>
               Through community initiatives and the support of
               volunteers, we continue to create meaningful and
               positive social change.
             </p>
-
           </div>
 
         </div>
@@ -223,7 +227,7 @@ function Home() {
       </section>
 
 
-      {/* Latest News and Events */}
+      {/* News and Events */}
       <section className="news-events">
 
         <div className="section-heading">
@@ -234,38 +238,38 @@ function Home() {
         <div className="news-container">
 
           <div className="news-card">
-
-            <h3>Community Awareness Campaign</h3>
+            <h3>
+              Community Awareness Campaign
+            </h3>
 
             <p>
               Join our awareness initiatives and help us spread
               knowledge and create positive social change.
             </p>
-
           </div>
 
 
           <div className="news-card">
-
-            <h3>Volunteer Drive</h3>
+            <h3>
+              Volunteer Drive
+            </h3>
 
             <p>
               We are welcoming passionate volunteers who want to
               contribute their time and skills to meaningful causes.
             </p>
-
           </div>
 
 
           <div className="news-card">
-
-            <h3>Community Development Program</h3>
+            <h3>
+              Community Development Program
+            </h3>
 
             <p>
               Our latest initiatives focus on supporting communities
               and creating opportunities for sustainable development.
             </p>
-
           </div>
 
         </div>
@@ -273,7 +277,7 @@ function Home() {
       </section>
 
 
-      {/* Partners and Supporters */}
+      {/* Partners */}
       <section className="partners">
 
         <div className="section-heading">
@@ -325,11 +329,17 @@ function Home() {
 
           <div className="hero-buttons">
 
-            <Link to="/donate" className="primary-btn">
+            <Link
+              to="/donate"
+              className="primary-btn"
+            >
               Donate Now
             </Link>
 
-            <Link to="/get-involved" className="secondary-btn">
+            <Link
+              to="/get-involved"
+              className="secondary-btn"
+            >
               Get Involved
             </Link>
 
