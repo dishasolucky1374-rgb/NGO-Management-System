@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import OurWork from "./pages/Ourwork";
-import Projects from "./pages/projects";
+import Projects from "./pages/Projects";
 import Media from "./pages/Media";
 import GetInvolved from "./pages/GetInvolved";
 import Blog from "./pages/Blog";
