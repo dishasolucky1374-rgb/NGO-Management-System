@@ -1,521 +1,598 @@
-/* =========================
-   ABOUT PAGE
-========================= */
+/* =========================================================
+   ABOUT PAGE - COMPLETE STYLING
+========================================================= */
 
 .about-page {
   width: 100%;
-  background: #fff;
-  color: #333;
+  min-height: 100vh;
+  background: #ffffff;
+  color: #333333;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-/* =========================
+.about-page *,
+.about-page *::before,
+.about-page *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   COMMON CONTAINER
+========================================================= */
+
+.about-container {
+  width: min(90%, 1200px);
+  margin: 0 auto;
+}
+
+/* =========================================================
+   COMMON SECTION
+========================================================= */
+
+.about-introduction,
+.about-vision-section,
+.about-story-section,
+.about-journey-section,
+.about-values-section,
+.about-programs-section,
+.about-team-section,
+.about-impact-section,
+.about-success-section,
+.about-cta-section {
+  width: 100%;
+  padding: 85px 0;
+}
+
+/* =========================================================
+   COMMON SECTION HEADING
+========================================================= */
+
+.about-section-heading {
+  max-width: 760px;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+.about-section-heading .about-label {
+  margin-bottom: 10px;
+}
+
+.about-section-heading h2 {
+  margin: 0 0 15px;
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #222222;
+}
+
+.about-section-heading > p:last-child {
+  margin: 0 auto;
+  max-width: 700px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #666666;
+}
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.about-label {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .about-hero {
-  min-height: 420px;
+  position: relative;
+  width: 100%;
+  min-height: 460px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  position: relative;
-  background: linear-gradient(
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)
+
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.55)
     ),
     url("https://images.unsplash.com/photo-1488521787991-ed7bbaae773c")
-      center/cover no-repeat;
+      center center / cover no-repeat;
 }
 
-.about-hero-content {
-  max-width: 800px;
-  padding: 40px 20px;
-  color: white;
+.about-hero-overlay {
+  width: 100%;
+  min-height: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.about-hero-content h1 {
-  font-size: 52px;
-  margin-bottom: 15px;
+.about-hero .about-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-hero .about-label {
+  margin-bottom: 12px;
+  color: #ffffff;
   font-weight: 700;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
-.about-hero-content p {
+.about-hero h1 {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: 56px;
+  line-height: 1.1;
+  font-weight: 800;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+.about-hero .about-container > p:last-child {
+  max-width: 700px;
+  margin: 0;
+  color: #ffffff;
   font-size: 19px;
   line-height: 1.7;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
-/* =========================
-   COMMON CONTAINER
-========================= */
-
-.about-container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.about-section {
-  padding: 80px 0;
-}
-
-.about-section-title {
-  text-align: center;
-  margin-bottom: 45px;
-}
-
-.about-section-title h2 {
-  font-size: 36px;
-  margin-bottom: 12px;
-}
-
-.about-section-title p {
-  color: #666;
-  font-size: 16px;
-}
-
-/* =========================
+/* =========================================================
    INTRODUCTION
-========================= */
+========================================================= */
+
+.about-introduction {
+  background: #ffffff;
+}
 
 .about-intro-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 50px;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
+  gap: 65px;
   align-items: center;
+}
+
+.about-intro-text {
+  min-width: 0;
+}
+
+.about-intro-text .about-label {
+  margin-bottom: 12px;
 }
 
 .about-intro-text h2 {
-  font-size: 34px;
-  margin-bottom: 20px;
+  margin: 0 0 22px;
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #222222;
 }
 
-.about-intro-text p {
+.about-intro-text p:not(.about-label) {
+  margin: 0 0 17px;
   font-size: 17px;
-  line-height: 1.8;
-  color: #555;
+  line-height: 1.85;
+  color: #555555;
 }
+
+.about-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+  color: #333333;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.about-link:hover {
+  transform: translateX(5px);
+}
+
+/* =========================================================
+   PURPOSE CARD
+========================================================= */
 
 .about-purpose-card {
-  padding: 35px;
-  border-radius: 14px;
+  padding: 42px 38px;
+  border-radius: 18px;
   background: #f7f7f7;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eeeeee;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+.purpose-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #333333;
+  color: #ffffff;
+  font-size: 22px;
+}
+
+.about-purpose-card .about-label {
+  margin-bottom: 10px;
 }
 
 .about-purpose-card h3 {
-  font-size: 24px;
-  margin-bottom: 15px;
+  margin: 0 0 16px;
+  font-size: 25px;
+  line-height: 1.35;
+  color: #222222;
 }
 
-.about-purpose-card p {
-  line-height: 1.7;
-  color: #666;
+.about-purpose-card p:last-child {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #666666;
 }
 
-/* =========================
+/* =========================================================
    VISION & MISSION
-========================= */
+========================================================= */
+
+.about-vision-section {
+  background: #f8f8f8;
+}
 
 .vision-mission-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 30px;
 }
 
-.vision-card,
-.mission-card {
+.vision-mission-card {
+  position: relative;
+  min-height: 300px;
   padding: 40px;
-  border-radius: 14px;
-  background: #f8f8f8;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
-.vision-card h3,
-.mission-card h3 {
-  font-size: 26px;
-  margin-bottom: 15px;
+.card-number {
+  display: block;
+  margin-bottom: 25px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #999999;
 }
 
-.vision-card p,
-.mission-card p {
+.vision-mission-card .about-label {
+  margin-bottom: 10px;
+}
+
+.vision-mission-card h3 {
+  margin: 0 0 16px;
+  font-size: 25px;
+  line-height: 1.4;
+  color: #222222;
+}
+
+.vision-mission-card > p:last-child {
+  margin: 0;
+  font-size: 16px;
   line-height: 1.8;
-  color: #555;
+  color: #666666;
 }
 
-/* =========================
+/* =========================================================
    OUR STORY
-========================= */
+========================================================= */
 
 .about-story-section {
-  background: #fafafa;
+  background: #ffffff;
 }
 
-.about-story-grid {
+.story-grid {
   display: grid;
-  grid-template-columns: 0.9fr 1.4fr;
-  gap: 55px;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 65px;
   align-items: center;
 }
 
-.story-image-box {
-  min-height: 380px;
-  border-radius: 16px;
-  background: linear-gradient(
-    135deg,
-    #eee,
-    #f8f8f8
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #888;
-  text-align: center;
-  padding: 30px;
+.story-image {
+  width: 100%;
+  height: 430px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #eeeeee;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.10);
 }
 
-.story-image-box p {
-  font-size: 18px;
+.story-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
-.story-content h2 {
-  font-size: 36px;
-  margin-bottom: 20px;
+.story-text {
+  min-width: 0;
 }
 
-.story-content p {
+.story-text .about-label {
+  margin-bottom: 12px;
+}
+
+.story-text h2 {
+  margin: 0 0 20px;
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #222222;
+}
+
+.story-text > p:not(.about-label) {
+  margin: 0;
   font-size: 17px;
-  line-height: 1.9;
-  color: #555;
-  margin-bottom: 18px;
+  line-height: 1.85;
+  color: #555555;
 }
 
-/* =========================
-   JOURNEY / MILESTONES
-========================= */
+.story-highlight {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 28px;
+  padding: 20px 22px;
+  border-left: 4px solid #333333;
+  background: #f7f7f7;
+  border-radius: 0 10px 10px 0;
+}
+
+.story-highlight strong {
+  font-size: 17px;
+  color: #222222;
+}
+
+.story-highlight span {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #666666;
+}
+
+/* =========================================================
+   JOURNEY
+========================================================= */
+
+.about-journey-section {
+  background: #f8f8f8;
+}
 
 .journey-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .journey-card {
+  min-height: 245px;
+  padding: 30px 24px;
   text-align: center;
-  padding: 30px 20px;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #eeeeee;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-.journey-year {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 12px;
+.journey-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.10);
+}
+
+.journey-card > span {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #999999;
 }
 
 .journey-card h3 {
+  margin: 0 0 12px;
   font-size: 20px;
-  margin-bottom: 10px;
+  line-height: 1.35;
+  color: #222222;
 }
 
 .journey-card p {
-  color: #666;
-  line-height: 1.6;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #666666;
 }
 
-/* =========================
+/* =========================================================
    CORE VALUES
-========================= */
+========================================================= */
 
-.core-values-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
+.about-values-section {
+  background: #ffffff;
 }
 
-.core-value-card {
-  padding: 30px;
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.value-card {
+  min-height: 235px;
+  padding: 30px 25px;
   text-align: center;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-.core-value-card h3 {
-  font-size: 21px;
-  margin-bottom: 12px;
-}
-
-.core-value-card p {
-  color: #666;
-  line-height: 1.6;
-}
-
-/* =========================
-   PROGRAMS
-========================= */
-
-.programs-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-}
-
-.program-card {
-  padding: 35px;
-  border-radius: 14px;
-  background: #f8f8f8;
-  transition: transform 0.25s ease;
-}
-
-.program-card:hover {
+.value-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.10);
 }
 
-.program-card h3 {
-  font-size: 23px;
-  margin-bottom: 12px;
+.value-number {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #999999;
 }
 
-.program-card p {
-  color: #666;
+.value-card h3 {
+  margin: 0 0 12px;
+  font-size: 21px;
+  line-height: 1.35;
+  color: #222222;
+}
+
+.value-card p {
+  margin: 0;
+  font-size: 15px;
   line-height: 1.7;
+  color: #666666;
 }
 
-/* =========================
-   TEAM
-========================= */
+/* =========================================================
+   PROGRAMS
+========================================================= */
 
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-
-.team-card {
-  text-align: center;
-  padding: 30px;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.08);
-}
-
-.team-image {
-  width: 120px !important;
-  height: 120px !important;
-  max-width: 120px !important;
-  max-height: 120px !important;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto 20px;
-}
-.team-card img {
-  width: 120px !important;
-  height: 120px !important;
-  max-width: 120px !important;
-  max-height: 120px !important;
-  object-fit: cover;
-  border-radius: 50%;
-  display: block;
-  margin: 0 auto 20px;
-}
-.team-placeholder {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: #eee;
-  margin: 0 auto 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #888;
-}
-
-.team-card h3 {
-  font-size: 22px;
-  margin-bottom: 8px;
-}
-
-.team-card p {
-  color: #777;
-}
-
-/* =========================
-   IMPACT
-========================= */
-
-.impact-section {
-  background: #f7f7f7;
-}
-
-.impact-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
-}
-
-.impact-card {
-  text-align: center;
-  padding: 35px 20px;
-  background: white;
-  border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-}
-
-.impact-card h3 {
-  font-size: 36px;
-  margin-bottom: 10px;
-}
-
-.impact-card p {
-  color: #666;
-}
-
-/* =========================
-   SUCCESS STORIES
-========================= */
-
-.success-stories-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-
-.success-story-card {
-  padding: 30px;
-  border-radius: 14px;
+.about-programs-section {
   background: #f8f8f8;
 }
 
-.success-story-card h3 {
-  margin-bottom: 12px;
-  font-size: 22px;
+.about-program-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
 }
 
-.success-story-card p {
-  color: #666;
-  line-height: 1.7;
+.about-program-card {
+  position: relative;
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 17px;
+  border: 1px solid #eeeeee;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-/* =========================
-   CTA
-========================= */
-
-.about-cta {
-  padding: 80px 20px;
-  text-align: center;
-  background: #333;
-  color: white;
+.about-program-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.10);
 }
 
-.about-cta h2 {
-  font-size: 38px;
-  margin-bottom: 15px;
+.program-number {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #999999;
 }
 
-.about-cta p {
-  font-size: 17px;
-  margin-bottom: 30px;
+.about-program-card h3 {
+  margin: 0 0 12px;
+  font-size: 24px;
+  line-height: 1.3;
+  color: #222222;
 }
 
-.about-cta-button {
-  display: inline-block;
-  padding: 13px 28px;
-  border-radius: 6px;
-  background: white;
-  color: #333;
+.about-program-card p {
+  margin: 0 0 20px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #666666;
+}
+
+.about-program-card a {
+  display: inline-flex;
+  align-items: center;
+  color: #333333;
+  font-size: 15px;
+  font-weight: 700;
   text-decoration: none;
-  font-weight: 600;
+  transition: transform 0.2s ease;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 900px) {
-  .about-intro-grid,
-  .about-story-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .journey-grid,
-  .core-values-grid,
-  .impact-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .team-grid,
-  .success-stories-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .about-hero-content h1 {
-    font-size: 42px;
-  }
+.about-program-card a:hover {
+  transform: translateX(5px);
 }
 
-@media (max-width: 600px) {
-  .about-section {
-    padding: 55px 0;
-  }
-
-  .vision-mission-grid,
-  .programs-grid,
-  .journey-grid,
-  .core-values-grid,
-  .team-grid,
-  .impact-grid,
-  .success-stories-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-hero {
-    min-height: 350px;
-  }
-
-  .about-hero-content h1 {
-    font-size: 34px;
-  }
-
-  .about-section-title h2,
-  .story-content h2 {
-    font-size: 29px;
-  }
-}
-/* =========================
+/* =========================================================
    LEADERSHIP & TEAM
-========================= */
+========================================================= */
 
 .about-team-section {
-  padding: 80px 0;
+  background: #ffffff;
 }
 
 .about-team-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 30px;
-  margin-top: 40px;
 }
 
 .about-team-card {
-  background: #fff;
-  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #eeeeee;
+  box-shadow: 0 9px 28px rgba(0, 0, 0, 0.07);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.about-team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.11);
 }
 
 .team-photo {
   width: 100%;
-  height: 260px;
+  height: 280px;
   overflow: hidden;
+  background: #eeeeee;
 }
 
 .team-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
 .team-info {
@@ -523,64 +600,412 @@
 }
 
 .team-info h3 {
-  font-size: 22px;
   margin: 0 0 8px;
+  font-size: 22px;
+  line-height: 1.3;
+  color: #222222;
 }
 
 .team-role {
-  font-weight: 600;
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #555555;
+}
+
+.team-info p:last-child {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #666666;
+}
+
+/* =========================================================
+   IMPACT
+========================================================= */
+
+.about-impact-section {
+  background: #f8f8f8;
+}
+
+.about-impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 25px;
+}
+
+.impact-card {
+  min-height: 170px;
+  padding: 35px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #eeeeee;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.impact-card h3 {
+  margin: 0 0 8px;
+  font-size: 38px;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #222222;
+}
+
+.impact-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #666666;
+}
+
+/* =========================================================
+   SUCCESS STORIES
+========================================================= */
+
+.about-success-section {
+  background: #ffffff;
+}
+
+.success-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.success-card {
+  min-height: 250px;
+  padding: 32px;
+  background: #f8f8f8;
+  border: 1px solid #eeeeee;
+  border-radius: 17px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.success-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.success-card > span {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #999999;
+}
+
+.success-card h3 {
+  margin: 0 0 13px;
+  font-size: 22px;
+  line-height: 1.35;
+  color: #222222;
+}
+
+.success-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: #666666;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.about-cta-section {
+  background: #333333;
+  color: #ffffff;
+  text-align: center;
+}
+
+.about-cta-section .about-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-cta-section .about-label {
   margin-bottom: 12px;
+  color: #ffffff;
 }
 
-.team-info p {
-  line-height: 1.6;
-  color: #666;
+.about-cta-section h2 {
+  margin: 0 0 16px;
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #ffffff;
 }
 
-/* Mobile */
-@media (max-width: 900px) {
+.about-cta-section > .about-container > p:not(.about-label) {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: #eeeeee;
+}
+
+.about-cta-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.about-cta-buttons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 145px;
+  padding: 13px 25px;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.about-cta-buttons a:hover {
+  transform: translateY(-2px);
+}
+
+.primary-btn {
+  background: #ffffff;
+  color: #333333;
+}
+
+.secondary-btn {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+  .about-container {
+    width: min(92%, 900px);
+  }
+
+  .about-intro-grid,
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .about-intro-text,
+  .story-text {
+    text-align: center;
+  }
+
+  .about-intro-text .about-link {
+    justify-content: center;
+  }
+
+  .about-purpose-card {
+    max-width: 650px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .story-image {
+    height: 400px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .story-highlight {
+    text-align: left;
+  }
+
+  .journey-grid,
+  .values-grid,
+  .about-impact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .about-team-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .success-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 600px) {
-  .about-team-grid {
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  .about-container {
+    width: 90%;
+  }
+
+  .about-introduction,
+  .about-vision-section,
+  .about-story-section,
+  .about-journey-section,
+  .about-values-section,
+  .about-programs-section,
+  .about-team-section,
+  .about-impact-section,
+  .about-success-section,
+  .about-cta-section {
+    padding: 60px 0;
+  }
+
+  .about-hero,
+  .about-hero-overlay {
+    min-height: 380px;
+  }
+
+  .about-hero h1 {
+    font-size: 40px;
+  }
+
+  .about-hero .about-container > p:last-child {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .about-section-heading {
+    margin-bottom: 35px;
+  }
+
+  .about-section-heading h2 {
+    font-size: 30px;
+  }
+
+  .about-intro-text h2,
+  .story-text h2 {
+    font-size: 30px;
+  }
+
+  .about-intro-text p:not(.about-label),
+  .story-text > p:not(.about-label) {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .about-purpose-card {
+    padding: 30px 25px;
+  }
+
+  .vision-mission-grid,
+  .about-program-grid,
+  .journey-grid,
+  .values-grid,
+  .about-team-grid,
+  .about-impact-grid,
+  .success-grid {
     grid-template-columns: 1fr;
   }
 
+  .vision-mission-card {
+    min-height: auto;
+    padding: 30px 25px;
+  }
+
+  .story-image {
+    height: 300px;
+  }
+
+  .journey-card,
+  .value-card,
+  .success-card {
+    min-height: auto;
+  }
+
+  .about-program-card {
+    padding: 30px 25px;
+  }
+
   .team-photo {
-    height: 240px;
+    height: 300px;
+  }
+
+  .impact-card {
+    min-height: 150px;
+  }
+
+  .about-cta-section h2 {
+    font-size: 30px;
+  }
+
+  .about-cta-section > .about-container > p:not(.about-label) {
+    font-size: 16px;
+  }
+
+  .about-cta-buttons {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .about-cta-buttons a {
+    width: 100%;
+    max-width: 260px;
   }
 }
-.story-image {
-  width: 100%;
-  height: 420px;
-  overflow: hidden;
-  border-radius: 16px;
-}
 
-.story-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.about-hero p {
-  color: white;
-}
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
 
-.about-hero .about-label {
-  color: white;
-  font-weight: 700;
-}
-.about-hero .about-label {
-  color: #fff;
-  font-weight: 700;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-}
-.about-hero h1 {
-  color: #fff !important;
-  font-weight: 800;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+@media (max-width: 450px) {
+  .about-hero,
+  .about-hero-overlay {
+    min-height: 340px;
+  }
+
+  .about-hero h1 {
+    font-size: 34px;
+  }
+
+  .about-hero .about-label {
+    font-size: 11px;
+    letter-spacing: 1.4px;
+  }
+
+  .about-section-heading h2 {
+    font-size: 27px;
+  }
+
+  .about-intro-text h2,
+  .story-text h2 {
+    font-size: 27px;
+  }
+
+  .story-image {
+    height: 260px;
+    border-radius: 15px;
+  }
+
+  .team-photo {
+    height: 260px;
+  }
+
+  .about-purpose-card,
+  .vision-mission-card,
+  .about-program-card,
+  .success-card {
+    padding: 25px 20px;
+  }
+
+  .impact-card h3 {
+    font-size: 32px;
+  }
 }
