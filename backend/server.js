@@ -53,6 +53,17 @@ app.use("/api/statistics", statisticsRoutes);
 
 const initiativesRoutes = require("./routes/initiatives");
 app.use("/api/initiatives", initiativesRoutes);
+const aboutStoryRoutes = require("./routes/aboutStory");
+app.use("/api/about/story", aboutStoryRoutes);
+
+const coreValuesRoutes = require("./routes/coreValues");
+app.use("/api/about/core-values", coreValuesRoutes);
+
+const aboutProgramsRoutes = require("./routes/aboutPrograms");
+app.use("/api/about/programs", aboutProgramsRoutes);
+
+const teamMembersRoutes = require("./routes/teamMembers");
+app.use("/api/about/team-members", teamMembersRoutes);
 
 // Test route
 app.get("/", (req, res) => {
