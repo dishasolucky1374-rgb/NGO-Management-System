@@ -1,212 +1,173 @@
-
-import { useState } from "react";
-
 function Media() {
-  const [activeTab, setActiveTab] = useState("photos");
-
-  const photos = [
+  const mediaItems = [
     {
-      title: "Education Program",
-      image: "/images/education.jpg",
+      title: "Tree Plantation Drive",
+      category: "Environment",
+      image:
+        "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80",
     },
     {
-      title: "Community Health Camp",
-      image: "/images/health.jpg",
+      title: "Food Distribution Program",
+      category: "Community Service",
+      image:
+        "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=1000&q=80",
     },
     {
-      title: "Women Empowerment Workshop",
-      image: "/images/women.jpg",
+      title: "Volunteer Team Activity",
+      category: "Volunteers",
+      image:
+        "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1000&q=80",
     },
     {
-      title: "Community Outreach",
-      image: "/images/community.jpg",
-    },
-  ];
-
-  const videos = [
-    {
-      title: "Our Impact Story",
-      video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      title: "Children Community Activity",
+      category: "Children",
+      image:
+        "https://images.unsplash.com/photo-1489493585363-d69421e0edd3?auto=format&fit=crop&w=1000&q=80",
     },
     {
-      title: "Education Initiative",
-      video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      title: "Women Empowerment Meet",
+      category: "Women Empowerment",
+      image:
+        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80",
+    },
+    {
+      title: "Community Cleanliness Drive",
+      category: "Environment",
+      image:
+        "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=1000&q=80",
+    },
+    {
+      title: "Fundraising & Charity Event",
+      category: "Fundraising",
+      image:
+        "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=1000&q=80",
+    },
+    {
+      title: "Community Gathering",
+      category: "Community",
+      image:
+        "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=80",
     },
   ];
 
   return (
-    <div className="media-page">
-
-      {/* Hero */}
-      <section className="media-hero">
+    <main>
+      {/* ================= HERO ================= */}
+      <section className="page-hero">
         <div>
-          <span className="section-tag">OUR MEDIA</span>
+          <p>OUR MEDIA</p>
 
-          <h1>
-            Stories of <span>Change & Impact</span>
-          </h1>
+          <h1>Media & Gallery</h1>
 
-          <p>
-            Explore our work, community stories, events and the people
-            whose lives are being transformed through our initiatives.
-          </p>
+          <span>
+            Explore moments, activities and stories from our journey of
+            creating meaningful change.
+          </span>
         </div>
       </section>
 
-      {/* Tabs */}
-      <section className="media-section">
+      {/* ================= INTRODUCTION ================= */}
+      <section className="projects-intro">
+        <p className="section-label">OUR JOURNEY</p>
 
-        <div className="media-tabs">
-          <button
-            className={activeTab === "photos" ? "active" : ""}
-            onClick={() => setActiveTab("photos")}
-          >
-            Photos
-          </button>
+        <h2>Moments that inspire change.</h2>
 
-          <button
-            className={activeTab === "videos" ? "active" : ""}
-            onClick={() => setActiveTab("videos")}
-          >
-            Videos
-          </button>
-
-          <button
-            className={activeTab === "press" ? "active" : ""}
-            onClick={() => setActiveTab("press")}
-          >
-            Press Releases
-          </button>
-
-          <button
-            className={activeTab === "electronic" ? "active" : ""}
-            onClick={() => setActiveTab("electronic")}
-          >
-            Electronic Media
-          </button>
-        </div>
-
-        {/* Photos */}
-        {activeTab === "photos" && (
-          <div className="media-grid">
-
-            {photos.map((photo, index) => (
-              <div className="media-card" key={index}>
-
-                <img
-                  src={photo.image}
-                  alt={photo.title}
-                />
-
-                <div className="media-card-content">
-                  <h3>{photo.title}</h3>
-                  <p>View our work and community impact.</p>
-                </div>
-
-              </div>
-            ))}
-
-          </div>
-        )}
-
-        {/* Videos */}
-        {activeTab === "videos" && (
-          <div className="video-grid">
-
-            {videos.map((item, index) => (
-              <div className="video-card" key={index}>
-
-                <iframe
-                  src={item.video}
-                  title={item.title}
-                  allowFullScreen
-                />
-
-                <h3>{item.title}</h3>
-
-              </div>
-            ))}
-
-          </div>
-        )}
-
-        {/* Press Releases */}
-        {activeTab === "press" && (
-          <div className="press-list">
-
-            <article className="press-card">
-              <span>PRESS RELEASE</span>
-              <h3>
-                NGO launches new education initiative for
-                underprivileged children
-              </h3>
-              <p>
-                Our latest initiative aims to provide quality
-                educational opportunities to children in underserved
-                communities.
-              </p>
-              <button>Read More →</button>
-            </article>
-
-            <article className="press-card">
-              <span>PRESS RELEASE</span>
-              <h3>
-                Community healthcare program reaches new villages
-              </h3>
-              <p>
-                Mobile health camps are helping communities access
-                essential healthcare services.
-              </p>
-              <button>Read More →</button>
-            </article>
-
-          </div>
-        )}
-
-        {/* Electronic Media */}
-        {activeTab === "electronic" && (
-          <div className="press-list">
-
-            <article className="press-card">
-              <span>MEDIA COVERAGE</span>
-
-              <h3>
-                Our community impact featured in local media
-              </h3>
-
-              <p>
-                Read about our initiatives and the impact created
-                across communities.
-              </p>
-
-              <a href="#" target="_blank" rel="noreferrer">
-                View Coverage →
-              </a>
-            </article>
-
-            <article className="press-card">
-              <span>MEDIA COVERAGE</span>
-
-              <h3>
-                Women empowerment initiative receives recognition
-              </h3>
-
-              <p>
-                Our livelihood program has helped women develop
-                skills and create sustainable income opportunities.
-              </p>
-
-              <a href="#" target="_blank" rel="noreferrer">
-                Read Article →
-              </a>
-            </article>
-
-          </div>
-        )}
-
+        <p>
+          Take a look at some of our community activities, awareness
+          initiatives, workshops and programs that bring people together and
+          create lasting impact.
+        </p>
       </section>
 
-    </div>
+      {/* ================= MEDIA GALLERY ================= */}
+      <section className="projects-section media-gallery">
+        {mediaItems.map((item, index) => (
+          <article className="project-card media-card" key={index}>
+            <div className="project-image media-image">
+              <img
+                src={item.image}
+                alt={item.title}
+              />
+
+              <div className="project-category">
+                {item.category}
+              </div>
+            </div>
+
+            <div className="project-content">
+              <h2>{item.title}</h2>
+
+              <p>
+                Capturing the efforts of our volunteers, communities and
+                beneficiaries as we work towards building a better future.
+              </p>
+
+              <button className="project-btn">
+                View Photo
+              </button>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      {/* ================= MEDIA HIGHLIGHTS ================= */}
+      <section className="project-impact">
+        <div className="section-heading">
+          <p>MEDIA HIGHLIGHTS</p>
+
+          <h2>Our work is powered by people and community.</h2>
+        </div>
+
+        <div className="project-stats">
+          <div>
+            <strong>50+</strong>
+            <span>Activities</span>
+          </div>
+
+          <div>
+            <strong>25+</strong>
+            <span>Projects</span>
+          </div>
+
+          <div>
+            <strong>100+</strong>
+            <span>Volunteers</span>
+          </div>
+
+          <div>
+            <strong>10K+</strong>
+            <span>People Reached</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= STORY SECTION ================= */}
+      <section className="projects-intro">
+        <p className="section-label">OUR STORIES</p>
+
+        <h2>Every picture tells a story.</h2>
+
+        <p>
+          Behind every activity is a community, a volunteer and a story of
+          hope. Our media captures these moments and helps share the impact of
+          our work with a wider audience.
+        </p>
+      </section>
+
+      {/* ================= CTA ================= */}
+      <section className="about-cta">
+        <h2>Be a part of our journey.</h2>
+
+        <p>
+          Join us in creating more moments of change and making a difference
+          in the lives of communities.
+        </p>
+
+        <a href="/get-involved" className="primary-btn">
+          Get Involved
+        </a>
+      </section>
+    </main>
   );
 }
 
