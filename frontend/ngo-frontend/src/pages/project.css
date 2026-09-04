@@ -1,0 +1,464 @@
+
+/* =========================================================
+   PROJECTS PAGE
+   ========================================================= */
+
+
+/* ================= HERO SECTION ================= */
+
+.page-hero {
+  background: #333;
+  color: #fff;
+  padding: 100px 8%;
+  text-align: center;
+}
+
+.page-hero p {
+  margin: 0 0 15px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #ddd;
+}
+
+.page-hero h1 {
+  margin: 0 0 15px;
+  font-size: 52px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.page-hero span {
+  display: block;
+  max-width: 700px;
+  margin: auto;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #ddd;
+}
+
+
+/* ================= INTRODUCTION ================= */
+
+.projects-intro {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 80px 20px 50px;
+  text-align: center;
+}
+
+.section-label {
+  margin-bottom: 12px;
+  color: #666;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.projects-intro h2 {
+  margin: 0 0 20px;
+  color: #222;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.projects-intro > p:last-child {
+  margin: 0;
+  color: #666;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+
+/* ================= PROJECT FILTERS ================= */
+
+.project-filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 20px 45px;
+  background: #fff;
+}
+
+.project-filters button {
+  padding: 11px 24px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.project-filters button:hover {
+  border-color: #333;
+  background: #333;
+  color: #fff;
+}
+
+.project-filters button.active {
+  border-color: #333;
+  background: #333;
+  color: #fff;
+}
+
+
+/* ================= PROJECT SECTION ================= */
+
+.projects-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 65px 7%;
+  background: #f7f7f7;
+}
+
+
+/* ================= PROJECT CARD ================= */
+
+.project-card {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #eee;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ================= PROJECT IMAGE ================= */
+
+.project-image {
+  position: relative;
+  height: 230px;
+  overflow: hidden;
+}
+
+.project-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.05);
+}
+
+
+/* ================= PROJECT CATEGORY ================= */
+
+.project-category {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  padding: 7px 13px;
+  background: #333;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+
+/* ================= PROJECT CONTENT ================= */
+
+.project-content {
+  padding: 25px;
+}
+
+.project-status {
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 6px 12px;
+  border: 1px solid #eee;
+  background: #f7f7f7;
+  color: #333;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.project-content h2 {
+  margin: 0 0 14px;
+  color: #222;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.project-content p {
+  margin: 0 0 18px;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.project-location {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* ================= VIEW PROJECT BUTTON ================= */
+
+.project-btn {
+  padding: 11px 21px;
+  border: none;
+  border-radius: 3px;
+  background: #333;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.project-btn:hover {
+  background: #222;
+}
+
+
+/* ================= NO PROJECTS MESSAGE ================= */
+
+.no-projects {
+  grid-column: 1 / -1;
+  padding: 65px 20px;
+  background: #fff;
+  border: 1px solid #eee;
+  text-align: center;
+}
+
+.no-projects h3 {
+  margin: 0 0 10px;
+  color: #222;
+  font-size: 24px;
+}
+
+.no-projects p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+
+/* ================= PROJECT IMPACT ================= */
+
+.project-impact {
+  padding: 80px 7%;
+  background: #fff;
+  text-align: center;
+}
+
+.section-heading p {
+  margin: 0 0 12px;
+  color: #666;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.section-heading h2 {
+  margin: 0 0 45px;
+  color: #222;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+
+/* ================= PROJECT STATISTICS ================= */
+
+.project-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1000px;
+  margin: 0 auto;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.project-stats div {
+  padding: 30px 15px;
+  border-right: 1px solid #eee;
+}
+
+.project-stats div:last-child {
+  border-right: none;
+}
+
+.project-stats strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #222;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.project-stats span {
+  display: block;
+  color: #666;
+  font-size: 14px;
+}
+
+
+/* ================= CTA SECTION ================= */
+
+.about-cta {
+  padding: 75px 20px;
+  background: #333;
+  color: #fff;
+  text-align: center;
+}
+
+.about-cta h2 {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.about-cta p {
+  margin: 0 0 25px;
+  color: #ddd;
+  font-size: 15px;
+}
+
+.primary-btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.primary-btn:hover {
+  background: #eee;
+}
+
+
+/* =========================================================
+   TABLET RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .projects-section {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 55px 5%;
+  }
+
+  .project-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .project-stats div:nth-child(2) {
+    border-right: none;
+  }
+
+  .project-stats div:nth-child(1),
+  .project-stats div:nth-child(2) {
+    border-bottom: 1px solid #eee;
+  }
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .page-hero {
+    padding: 70px 20px;
+  }
+
+  .page-hero h1 {
+    font-size: 38px;
+  }
+
+  .page-hero span {
+    font-size: 15px;
+  }
+
+  .projects-intro {
+    padding: 60px 20px 35px;
+  }
+
+  .projects-intro h2 {
+    font-size: 28px;
+  }
+
+  .projects-intro > p:last-child {
+    font-size: 15px;
+  }
+
+  .project-filters {
+    gap: 8px;
+    padding: 10px 15px 35px;
+  }
+
+  .project-filters button {
+    padding: 9px 15px;
+    font-size: 13px;
+  }
+
+  .projects-section {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 40px 20px;
+  }
+
+  .project-image {
+    height: 220px;
+  }
+
+  .project-content {
+    padding: 22px;
+  }
+
+  .project-content h2 {
+    font-size: 20px;
+  }
+
+  .project-impact {
+    padding: 60px 20px;
+  }
+
+  .section-heading h2 {
+    font-size: 27px;
+  }
+
+  .project-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .project-stats div {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .project-stats div:last-child {
+    border-bottom: none;
+  }
+
+  .about-cta {
+    padding: 60px 20px;
+  }
+
+  .about-cta h2 {
+    font-size: 27px;
+  }
+}
