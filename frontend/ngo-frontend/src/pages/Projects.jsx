@@ -1,4 +1,9 @@
+import { useState } from "react";
+import "./projects.css";
+
 function Projects() {
+  const [activeFilter, setActiveFilter] = useState("All");
+
   const projects = [
     {
       title: "Education for Every Child",
@@ -67,6 +72,11 @@ function Projects() {
     },
   ];
 
+  const filteredProjects =
+    activeFilter === "All"
+      ? projects
+      : projects.filter((project) => project.status === activeFilter);
+
   return (
     <main>
       {/* ================= HERO ================= */}
@@ -94,44 +104,79 @@ function Projects() {
         </p>
       </section>
 
+      {/* ================= PROJECT FILTERS ================= */}
+      <section className="project-filters">
+        <button
+          className={activeFilter === "All" ? "active" : ""}
+          onClick={() => setActiveFilter("All")}
+        >
+          All Projects
+        </button>
+
+        <button
+          className={activeFilter === "Ongoing" ? "active" : ""}
+          onClick={() => setActiveFilter("Ongoing")}
+        >
+          Ongoing
+        </button>
+
+        <button
+          className={activeFilter === "Completed" ? "active" : ""}
+          onClick={() => setActiveFilter("Completed")}
+        >
+          Completed
+        </button>
+
+        <button
+          className={activeFilter === "Upcoming" ? "active" : ""}
+          onClick={() => setActiveFilter("Upcoming")}
+        >
+          Upcoming
+        </button>
+      </section>
+
       {/* ================= PROJECT GRID ================= */}
       <section className="projects-section">
-        {projects.map((project, index) => (
-          <article className="project-card" key={index}>
-            
-            {/* PROJECT IMAGE */}
-            <div className="project-image">
-              <img
-                src={project.image}
-                alt={project.title}
-              />
+        {filteredProjects.length > 0 ? (
+          filteredProjects.map((project, index) => (
+            <article className="project-card" key={index}>
+              {/* PROJECT IMAGE */}
+              <div className="project-image">
+                <img src={project.image} alt={project.title} />
 
-              <div className="project-category">
-                {project.category}
-              </div>
-            </div>
-
-            {/* PROJECT CONTENT */}
-            <div className="project-content">
-              
-              <div className="project-status">
-                {project.status}
+                <div className="project-category">
+                  {project.category}
+                </div>
               </div>
 
-              <h2>{project.title}</h2>
+              {/* PROJECT CONTENT */}
+              <div className="project-content">
+                <div className="project-status">
+                  {project.status}
+                </div>
 
-              <p>{project.description}</p>
+                <h2>{project.title}</h2>
 
-              <div className="project-location">
-                📍 {project.location}
+                <p>{project.description}</p>
+
+                <div className="project-location">
+                  📍 {project.location}
+                </div>
+
+                <button className="project-btn">
+                  View Project
+                </button>
               </div>
-
-              <button className="project-btn">
-                View Project
-              </button>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))
+        ) : (
+          <div className="no-projects">
+            <h3>No Upcoming Projects</h3>
+            <p>
+              New initiatives will be added here soon.
+            </p>
+          </div>
+        )}
       </section>
 
       {/* ================= PROJECT IMPACT ================= */}
