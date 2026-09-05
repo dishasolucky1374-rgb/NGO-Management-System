@@ -1,76 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./projects.css";
 
 function Projects() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const projects = [
-    {
-      title: "Education for Every Child",
-      category: "Education",
-      location: "Nashik, Maharashtra",
-      status: "Ongoing",
-      description:
-        "Supporting children from underserved communities with educational resources, learning support, and opportunities for a better future.",
-      image:
-        "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80",
-    },
-
-    {
-      title: "Community Health Initiative",
-      category: "Healthcare",
-      location: "Maharashtra",
-      status: "Ongoing",
-      description:
-        "Providing community-based healthcare support, awareness programs, and health camps for underserved communities.",
-      image:
-        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80",
-    },
-
-    {
-      title: "Women Skill Development",
-      category: "Women Empowerment",
-      location: "Nashik, Maharashtra",
-      status: "Completed",
-      description:
-        "Helping women develop practical skills and access livelihood opportunities to become financially independent.",
-      image:
-        "https://images.unsplash.com/photo-1594708767771-a7502209ff51?auto=format&fit=crop&w=900&q=80",
-    },
-
-    {
-      title: "Digital Learning Program",
-      category: "Education",
-      location: "Rural Maharashtra",
-      status: "Ongoing",
-      description:
-        "Promoting digital learning and improving access to educational technology for students in rural communities.",
-      image:
-        "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80",
-    },
-
-    {
-      title: "Livelihood Development",
-      category: "Livelihood",
-      location: "Maharashtra",
-      status: "Ongoing",
-      description:
-        "Supporting marginalized communities through vocational training, skill development, and livelihood generation.",
-      image:
-        "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=80",
-    },
-
-    {
-      title: "Community Awareness Drive",
-      category: "Community",
-      location: "Maharashtra",
-      status: "Completed",
-      description:
-        "Creating awareness about education, healthcare, women's rights, and community development.",
-      image:
-        "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=900&q=80",
-    },
-  ];
+  useEffect(() => {
+    fetch("http://localhost:5000/api/projects")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch projects");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setProjects(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching projects:", err);
+        setError("Unable to load projects.");
+        setLoading(false);
+      });
+  }, []);
 
   const filteredProjects =
     activeFilter === "All"
@@ -137,15 +91,30 @@ function Projects() {
 
       {/* ================= PROJECT GRID ================= */}
       <section className="projects-section">
-        {filteredProjects.length > 0 ? (
-          filteredProjects.map((project, index) => (
-            <article className="project-card" key={index}>
+        {loading ? (
+          <div className="no-projects">
+            <h3>Loading Projects...</h3>
+          </div>
+        ) : error ? (
+          <div className="no-projects">
+            <h3>{error}</h3>
+            <p>Please try again later.</p>
+          </div>
+        ) : filteredProjects.length > 0 ? (
+          filteredProjects.map((project) => (
+            <article className="project-card" key={project.id}>
               {/* PROJECT IMAGE */}
               <div className="project-image">
-                <img src={project.image} alt={project.title} />
+                <img
+                  src={
+                    project.image ||
+                    "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80"
+                  }
+                  alt={project.title}
+                />
 
                 <div className="project-category">
-                  {project.category}
+                  {project.category || "Community Development"}
                 </div>
               </div>
 
@@ -163,7 +132,12 @@ function Projects() {
                   📍 {project.location}
                 </div>
 
-                <button className="project-btn">
+                <button
+                  className="project-btn"
+                  onClick={() =>
+                    (window.location.href = `/projects/${project.id}`)
+                  }
+                >
                   View Project
                 </button>
               </div>
@@ -171,10 +145,8 @@ function Projects() {
           ))
         ) : (
           <div className="no-projects">
-            <h3>No Upcoming Projects</h3>
-            <p>
-              New initiatives will be added here soon.
-            </p>
+            <h3>No {activeFilter} Projects</h3>
+            <p>New initiatives will be added here soon.</p>
           </div>
         )}
       </section>
