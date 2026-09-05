@@ -4,19 +4,19 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 import Home from "./pages/Home.jsx";
-import About from "./pages/About";
-import OurWork from "./pages/OurWork";
-import Projects from "./pages/Projects";
-import ProjectDetails from "./pages/ProjectDetails";
-import Media from "./pages/Media";
-import GetInvolved from "./pages/GetInvolved";
-import Blog from "./pages/Blog";
-import Contact from "./pages/Contact";
-import Donate from "./pages/Donate";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Account from "./pages/Account";
-import AdminDashboard from "./pages/AdminDashboard";
+import About from "./pages/About.jsx";
+import OurWork from "./pages/Ourwork.jsx";
+import Projects from "./pages/Projects.jsx";
+import ProjectDetails from "./pages/ProjectDetails.jsx";
+import Media from "./pages/media.jsx";
+import GetInvolved from "./pages/GetInvolved.jsx";
+import Blog from "./pages/Blog.jsx";
+import Contact from "./pages/contact.jsx";
+import Donate from "./pages/donate.jsx";
+import Login from "./pages/login.jsx";
+import Register from "./pages/register.jsx";
+import Account from "./pages/Account.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 
 function App() {
   return (
