@@ -5,22 +5,22 @@ import Footer from "./components/Footer";
 
 import Home from "./pages/Home.jsx";
 import About from "./pages/About";
-import OurWork from "./pages/Ourwork";
+import OurWork from "./pages/OurWork";
 import Projects from "./pages/Projects";
+import ProjectDetails from "./pages/ProjectDetails";
 import Media from "./pages/Media";
 import GetInvolved from "./pages/GetInvolved";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Donate from "./pages/Donate";
-import Login from "./pages/login";
-import Register from "./pages/register";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Account from "./pages/Account";
 import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   return (
     <BrowserRouter>
-
       <Navbar />
 
       <Routes>
@@ -29,6 +29,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/our-work" element={<OurWork />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/:id" element={<ProjectDetails />} />
         <Route path="/media" element={<Media />} />
         <Route path="/get-involved" element={<GetInvolved />} />
         <Route path="/blog" element={<Blog />} />
@@ -45,11 +46,9 @@ function App() {
           path="/admin-dashboard"
           element={<AdminDashboard />}
         />
-
       </Routes>
 
       <Footer />
-
     </BrowserRouter>
   );
 }
