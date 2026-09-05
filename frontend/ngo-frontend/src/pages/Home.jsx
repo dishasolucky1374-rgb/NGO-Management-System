@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "./home.css";
+import "./Home.css";
 
 function Home() {
   const [banners, setBanners] = useState([]);
@@ -49,15 +49,14 @@ function Home() {
         <div className="hero-content">
 
           <p className="hero-label">
-            TOGETHER, WE CAN MAKE A DIFFERENCE
-          </p>
+  CREATING CHANGE TOGETHER
+</p>
 
           <h1>
-            {banners[0]?.title || "Empowering Lives."}
-            <br />
-            Building Futures.
-          </h1>
-
+  Empowering Communities.
+  <br />
+  Creating Lasting Impact.
+</h1>
           <p>
             {banners[0]?.description ||
               "We work with children, women, and communities to create opportunities through education, healthcare, and livelihood programs."}
