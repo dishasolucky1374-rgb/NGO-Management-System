@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "./Home.css";
+import "./home.css";
 
 function Home() {
   const [banners, setBanners] = useState([]);
