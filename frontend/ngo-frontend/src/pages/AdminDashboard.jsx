@@ -1,11 +1,1084 @@
 import React, { useEffect, useState } from "react";
 
-const API = "http://localhost:5000";
+const API = "https://ngo-management-backend.onrender.com";
 
 // ======================================================
 // MAIN ADMIN DASHBOARD
 // ======================================================
+function MediaManagementSection() {
+  const [activeMediaTab, setActiveMediaTab] = useState("press");
 
+  const [pressReleases, setPressReleases] = useState([]);
+  const [pressForm, setPressForm] = useState({
+    title: "",
+    description: "",
+    release_date: "",
+  });
+
+  const [editingPressId, setEditingPressId] = useState(null);
+  const [mediaCoverage, setMediaCoverage] = useState([]);
+
+const [coverageForm, setCoverageForm] = useState({
+  title: "",
+  url: "",
+});
+
+const [editingCoverageId, setEditingCoverageId] = useState(null);
+  const [galleryImages, setGalleryImages] = useState([]);
+
+  const [galleryForm, setGalleryForm] = useState({
+    image_path: "",
+    description: "",
+  });
+
+  const [editingGalleryId, setEditingGalleryId] = useState(null);
+
+  const MEDIA_API = "http://localhost:5000/api/media";
+const [mediaVideos, setMediaVideos] = useState([]);
+
+const [videoForm, setVideoForm] = useState({
+  video_url: "",
+  description: "",
+});
+
+const [editingVideoId, setEditingVideoId] = useState(null);
+  // Fetch Press Releases
+  const fetchPressReleases = async () => {
+    try {
+      const res = await fetch(`${MEDIA_API}/press-releases`);
+      const data = await res.json();
+
+      if (Array.isArray(data)) {
+        setPressReleases(data);
+      }
+    } catch (error) {
+      console.error("Error fetching press releases:", error);
+    }
+  };
+  const fetchMediaCoverage = async () => {
+  try {
+    const res = await fetch(`${MEDIA_API}/coverage`);
+    const data = await res.json();
+
+    if (Array.isArray(data)) {
+      setMediaCoverage(data);
+    }
+  } catch (error) {
+    console.error("Error fetching media coverage:", error);
+  }
+};
+
+  useEffect(() => {
+  fetchPressReleases();
+  fetchMediaCoverage();
+  fetchGalleryImages();
+  fetchMediaVideos();
+}, []);
+
+  // Add / Update Press Release
+  const handlePressSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const url = editingPressId
+        ? `${MEDIA_API}/press-releases/${editingPressId}`
+        : `${MEDIA_API}/press-releases`;
+
+      const method = editingPressId ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pressForm),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to save press release");
+      }
+
+      setPressForm({
+        title: "",
+        description: "",
+        release_date: "",
+      });
+
+      setEditingPressId(null);
+      fetchPressReleases();
+
+      alert(
+        editingPressId
+          ? "Press release updated successfully!"
+          : "Press release added successfully!"
+      );
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong.");
+    }
+  };
+
+  // Edit
+  const editPressRelease = (item) => {
+    setEditingPressId(item.id);
+
+    setPressForm({
+      title: item.title || "",
+      description: item.description || "",
+      release_date: item.release_date
+        ? item.release_date.substring(0, 10)
+        : "",
+    });
+  };
+
+  // Delete
+   // Delete Press Release
+  const deletePressRelease = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this press release?")) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`${MEDIA_API}/press-releases/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to delete");
+      }
+
+      fetchPressReleases();
+      alert("Press release deleted successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete press release.");
+    }
+  };
+
+  // Add / Update Media Coverage
+  const handleCoverageSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const url = editingCoverageId
+        ? `${MEDIA_API}/coverage/${editingCoverageId}`
+        : `${MEDIA_API}/coverage`;
+
+      const method = editingCoverageId ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(coverageForm),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to save media coverage");
+      }
+
+      setCoverageForm({
+        title: "",
+        url: "",
+      });
+
+      setEditingCoverageId(null);
+      fetchMediaCoverage();
+
+      alert(
+        editingCoverageId
+          ? "Media coverage updated successfully!"
+          : "Media coverage added successfully!"
+      );
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong.");
+    }
+  };
+
+  // Edit Media Coverage
+  const editCoverage = (item) => {
+    setEditingCoverageId(item.id);
+
+    setCoverageForm({
+      title: item.title || "",
+      url: item.url || "",
+    });
+  };
+
+  // Delete Media Coverage
+  const deleteCoverage = async (id) => {
+    if (
+      !window.confirm(
+        "Are you sure you want to delete this media coverage?"
+      )
+    ) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`${MEDIA_API}/coverage/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to delete");
+      }
+
+      fetchMediaCoverage();
+      alert("Media coverage deleted successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete media coverage.");
+    }
+  };
+    // Fetch Gallery Images
+  const fetchGalleryImages = async () => {
+    try {
+      const res = await fetch(`${MEDIA_API}/gallery`);
+      const data = await res.json();
+
+      if (Array.isArray(data)) {
+        setGalleryImages(data);
+      }
+    } catch (error) {
+      console.error("Error fetching gallery images:", error);
+    }
+  };
+
+  // Add / Update Gallery Image
+  const handleGallerySubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const url = editingGalleryId
+        ? `${MEDIA_API}/gallery/${editingGalleryId}`
+        : `${MEDIA_API}/gallery`;
+
+      const method = editingGalleryId ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(galleryForm),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to save gallery image");
+      }
+
+      setGalleryForm({
+        image_path: "",
+        description: "",
+      });
+
+      setEditingGalleryId(null);
+      fetchGalleryImages();
+
+      alert(
+        editingGalleryId
+          ? "Gallery image updated successfully!"
+          : "Gallery image added successfully!"
+      );
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong.");
+    }
+  };
+
+  // Edit Gallery Image
+  const editGalleryImage = (item) => {
+    setEditingGalleryId(item.id);
+
+    setGalleryForm({
+      image_path: item.image_path || "",
+      description: item.description || "",
+    });
+  };
+
+  // Delete Gallery Image
+  const deleteGalleryImage = async (id) => {
+    if (
+      !window.confirm(
+        "Are you sure you want to delete this gallery image?"
+      )
+    ) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`${MEDIA_API}/gallery/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to delete gallery image");
+      }
+
+      fetchGalleryImages();
+      alert("Gallery image deleted successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete gallery image.");
+    }
+  };
+  // Fetch Videos
+const fetchMediaVideos = async () => {
+  try {
+    const res = await fetch(`${MEDIA_API}/videos`);
+    const data = await res.json();
+
+    if (Array.isArray(data)) {
+      setMediaVideos(data);
+    }
+  } catch (error) {
+    console.error("Error fetching videos:", error);
+  }
+};
+
+// Add / Update Video
+const handleVideoSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const url = editingVideoId
+      ? `${MEDIA_API}/videos/${editingVideoId}`
+      : `${MEDIA_API}/videos`;
+
+    const method = editingVideoId ? "PUT" : "POST";
+
+    const res = await fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(videoForm),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to save video");
+    }
+
+    setVideoForm({
+      video_url: "",
+      description: "",
+    });
+
+    setEditingVideoId(null);
+    fetchMediaVideos();
+
+    alert(
+      editingVideoId
+        ? "Video updated successfully!"
+        : "Video added successfully!"
+    );
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong.");
+  }
+};
+
+// Edit Video
+const editMediaVideo = (item) => {
+  setEditingVideoId(item.id);
+
+  setVideoForm({
+    video_url: item.video_url || "",
+    description: item.description || "",
+  });
+};
+
+// Delete Video
+const deleteMediaVideo = async (id) => {
+  if (
+    !window.confirm(
+      "Are you sure you want to delete this video?"
+    )
+  ) {
+    return;
+  }
+
+  try {
+    const res = await fetch(`${MEDIA_API}/videos/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to delete video");
+    }
+
+    fetchMediaVideos();
+    alert("Video deleted successfully!");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to delete video.");
+  }
+};
+  const mediaInputStyle = {
+    width: "100%",
+    padding: "10px",
+    marginTop: "6px",
+    marginBottom: "15px",
+    border: "1px solid #d1d5db",
+    borderRadius: "6px",
+    boxSizing: "border-box",
+  };
+
+  return (
+    <div style={{ padding: "30px" }}>
+      <h2 style={{ marginBottom: "25px" }}>Media Management</h2>
+
+      {/* Tabs */}
+      <div style={{ display: "flex", gap: "10px", marginBottom: "25px" }}>
+        <button
+          onClick={() => setActiveMediaTab("press")}
+          style={{
+            padding: "10px 18px",
+            border: "none",
+            borderRadius: "6px",
+            cursor: "pointer",
+            background:
+              activeMediaTab === "press" ? "#2563eb" : "#e5e7eb",
+            color: activeMediaTab === "press" ? "#fff" : "#111827",
+          }}
+        >
+          Press Releases
+        </button>
+
+        <button
+          onClick={() => setActiveMediaTab("coverage")}
+          style={{
+            padding: "10px 18px",
+            border: "none",
+            borderRadius: "6px",
+            cursor: "pointer",
+          }}
+        >
+          Media Coverage
+        </button>
+
+        <button
+          onClick={() => setActiveMediaTab("gallery")}
+          style={{
+            padding: "10px 18px",
+            border: "none",
+            borderRadius: "6px",
+            cursor: "pointer",
+          }}
+        >
+          Image Gallery
+        </button>
+
+        <button
+          onClick={() => setActiveMediaTab("videos")}
+          style={{
+            padding: "10px 18px",
+            border: "none",
+            borderRadius: "6px",
+            cursor: "pointer",
+          }}
+        >
+          Videos
+        </button>
+      </div>
+
+      {/* PRESS RELEASES */}
+      {activeMediaTab === "press" && (
+        <div>
+          <h3>{editingPressId ? "Edit Press Release" : "Add Press Release"}</h3>
+
+          <form onSubmit={handlePressSubmit}>
+            <label>Title</label>
+            <input
+              type="text"
+              value={pressForm.title}
+              onChange={(e) =>
+                setPressForm({
+                  ...pressForm,
+                  title: e.target.value,
+                })
+              }
+              style={mediaInputStyle}
+              required
+            />
+
+            <label>Description</label>
+            <textarea
+              value={pressForm.description}
+              onChange={(e) =>
+                setPressForm({
+                  ...pressForm,
+                  description: e.target.value,
+                })
+              }
+              style={{
+                ...mediaInputStyle,
+                minHeight: "100px",
+              }}
+              required
+            />
+
+            <label>Release Date</label>
+            <input
+              type="date"
+              value={pressForm.release_date}
+              onChange={(e) =>
+                setPressForm({
+                  ...pressForm,
+                  release_date: e.target.value,
+                })
+              }
+              style={mediaInputStyle}
+              required
+            />
+
+            <button
+              type="submit"
+              style={{
+                padding: "10px 20px",
+                background: "#2563eb",
+                color: "#fff",
+                border: "none",
+                borderRadius: "6px",
+                cursor: "pointer",
+              }}
+            >
+              {editingPressId ? "Update Press Release" : "Add Press Release"}
+            </button>
+
+            {editingPressId && (
+              <button
+                type="button"
+                onClick={() => {
+                  setEditingPressId(null);
+                  setPressForm({
+                    title: "",
+                    description: "",
+                    release_date: "",
+                  });
+                }}
+                style={{
+                  marginLeft: "10px",
+                  padding: "10px 20px",
+                  border: "1px solid #ccc",
+                  borderRadius: "6px",
+                  cursor: "pointer",
+                }}
+              >
+                Cancel
+              </button>
+            )}
+          </form>
+
+          <hr style={{ margin: "30px 0" }} />
+
+          <h3>Existing Press Releases</h3>
+
+          {pressReleases.length === 0 ? (
+            <p>No press releases added yet.</p>
+          ) : (
+            pressReleases.map((item) => (
+              <div
+                key={item.id}
+                style={{
+                  border: "1px solid #ddd",
+                  borderRadius: "8px",
+                  padding: "18px",
+                  marginBottom: "15px",
+                }}
+              >
+                <h4>{item.title}</h4>
+
+                <p>{item.description}</p>
+
+                <small>
+                  Release Date:{" "}
+                  {item.release_date
+                    ? item.release_date.substring(0, 10)
+                    : ""}
+                </small>
+
+                <div style={{ marginTop: "12px" }}>
+                  <button
+                    onClick={() => editPressRelease(item)}
+                    style={{
+                      marginRight: "10px",
+                      padding: "8px 15px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    onClick={() => deletePressRelease(item.id)}
+                    style={{
+                      padding: "8px 15px",
+                      background: "#dc2626",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+
+      {activeMediaTab === "coverage" && (
+  <div>
+    <h3>
+      {editingCoverageId
+        ? "Edit Media Coverage"
+        : "Add Media Coverage"}
+    </h3>
+
+    <form onSubmit={handleCoverageSubmit}>
+      <label>Title</label>
+
+      <input
+        type="text"
+        value={coverageForm.title}
+        onChange={(e) =>
+          setCoverageForm({
+            ...coverageForm,
+            title: e.target.value,
+          })
+        }
+        style={mediaInputStyle}
+        placeholder="Enter media coverage title"
+        required
+      />
+
+      <label>Media URL</label>
+
+      <input
+        type="url"
+        value={coverageForm.url}
+        onChange={(e) =>
+          setCoverageForm({
+            ...coverageForm,
+            url: e.target.value,
+          })
+        }
+        style={mediaInputStyle}
+        placeholder="https://example.com/article"
+        required
+      />
+
+      <button
+        type="submit"
+        style={{
+          padding: "10px 20px",
+          background: "#2563eb",
+          color: "#fff",
+          border: "none",
+          borderRadius: "6px",
+          cursor: "pointer",
+        }}
+      >
+        {editingCoverageId
+          ? "Update Coverage"
+          : "Add Coverage"}
+      </button>
+
+      {editingCoverageId && (
+        <button
+          type="button"
+          onClick={() => {
+            setEditingCoverageId(null);
+            setCoverageForm({
+              title: "",
+              url: "",
+            });
+          }}
+          style={{
+            marginLeft: "10px",
+            padding: "10px 20px",
+            border: "1px solid #ccc",
+            borderRadius: "6px",
+            cursor: "pointer",
+          }}
+        >
+          Cancel
+        </button>
+      )}
+    </form>
+
+    <hr style={{ margin: "30px 0" }} />
+
+    <h3>Existing Media Coverage</h3>
+
+    {mediaCoverage.length === 0 ? (
+      <p>No media coverage added yet.</p>
+    ) : (
+      mediaCoverage.map((item) => (
+        <div
+          key={item.id}
+          style={{
+            border: "1px solid #ddd",
+            borderRadius: "8px",
+            padding: "18px",
+            marginBottom: "15px",
+          }}
+        >
+          <h4>{item.title}</h4>
+
+          <p>{item.url}</p>
+
+          <div style={{ marginTop: "12px" }}>
+            <button
+              onClick={() => editCoverage(item)}
+              style={{
+                marginRight: "10px",
+                padding: "8px 15px",
+                cursor: "pointer",
+              }}
+            >
+              Edit
+            </button>
+
+            <button
+              onClick={() => deleteCoverage(item.id)}
+              style={{
+                padding: "8px 15px",
+                background: "#dc2626",
+                color: "#fff",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      ))
+    )}
+  </div>
+)}
+
+{activeMediaTab === "gallery" && (
+  <div>
+    <h3>
+      {editingGalleryId
+        ? "Edit Gallery Image"
+        : "Add Gallery Image"}
+    </h3>
+
+    <form onSubmit={handleGallerySubmit}>
+      <label>Image URL</label>
+
+      <input
+        type="url"
+        value={galleryForm.image_path}
+        onChange={(e) =>
+          setGalleryForm({
+            ...galleryForm,
+            image_path: e.target.value,
+          })
+        }
+        style={mediaInputStyle}
+        placeholder="https://example.com/image.jpg"
+        required
+      />
+
+      <label>Description</label>
+
+      <textarea
+        value={galleryForm.description}
+        onChange={(e) =>
+          setGalleryForm({
+            ...galleryForm,
+            description: e.target.value,
+          })
+        }
+        style={{
+          ...mediaInputStyle,
+          minHeight: "80px",
+        }}
+        placeholder="Enter image description"
+      />
+
+      <button
+        type="submit"
+        style={{
+          padding: "10px 20px",
+          background: "#2563eb",
+          color: "#fff",
+          border: "none",
+          borderRadius: "6px",
+          cursor: "pointer",
+        }}
+      >
+        {editingGalleryId
+          ? "Update Image"
+          : "Add Image"}
+      </button>
+
+      {editingGalleryId && (
+        <button
+          type="button"
+          onClick={() => {
+            setEditingGalleryId(null);
+            setGalleryForm({
+              image_path: "",
+              description: "",
+            });
+          }}
+          style={{
+            marginLeft: "10px",
+            padding: "10px 20px",
+            border: "1px solid #ccc",
+            borderRadius: "6px",
+            cursor: "pointer",
+          }}
+        >
+          Cancel
+        </button>
+      )}
+    </form>
+
+    <hr style={{ margin: "30px 0" }} />
+
+    <h3>Existing Gallery Images</h3>
+
+    {galleryImages.length === 0 ? (
+      <p>No gallery images added yet.</p>
+    ) : (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns:
+            "repeat(auto-fill, minmax(220px, 1fr))",
+          gap: "20px",
+        }}
+      >
+        {galleryImages.map((item) => (
+          <div
+            key={item.id}
+            style={{
+              border: "1px solid #ddd",
+              borderRadius: "8px",
+              padding: "12px",
+              background: "#fff",
+            }}
+          >
+            <img
+              src={item.image_path}
+              alt={item.description || "Gallery"}
+              style={{
+                width: "100%",
+                height: "160px",
+                objectFit: "cover",
+                borderRadius: "6px",
+                marginBottom: "10px",
+              }}
+              onError={(e) => {
+                e.target.style.display = "none";
+              }}
+            />
+
+            <h4>
+              {item.description || "Gallery Image"}
+            </h4>
+
+            <div style={{ marginTop: "12px" }}>
+              <button
+                onClick={() => editGalleryImage(item)}
+                style={{
+                  marginRight: "8px",
+                  padding: "8px 14px",
+                  cursor: "pointer",
+                }}
+              >
+                Edit
+              </button>
+
+              <button
+                onClick={() => deleteGalleryImage(item.id)}
+                style={{
+                  padding: "8px 14px",
+                  background: "#dc2626",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+)}
+
+{activeMediaTab === "videos" && (
+  <div>
+    <h3>
+      {editingVideoId
+        ? "Edit Video"
+        : "Add Video"}
+    </h3>
+
+    <form onSubmit={handleVideoSubmit}>
+      <label>Video URL</label>
+
+      <input
+        type="url"
+        value={videoForm.video_url}
+        onChange={(e) =>
+          setVideoForm({
+            ...videoForm,
+            video_url: e.target.value,
+          })
+        }
+        style={mediaInputStyle}
+        placeholder="https://www.youtube.com/watch?v=..."
+        required
+      />
+
+      <label>Description</label>
+
+      <textarea
+        value={videoForm.description}
+        onChange={(e) =>
+          setVideoForm({
+            ...videoForm,
+            description: e.target.value,
+          })
+        }
+        style={{
+          ...mediaInputStyle,
+          minHeight: "80px",
+        }}
+        placeholder="Enter video description"
+      />
+
+      <button
+        type="submit"
+        style={{
+          padding: "10px 20px",
+          background: "#2563eb",
+          color: "#fff",
+          border: "none",
+          borderRadius: "6px",
+          cursor: "pointer",
+        }}
+      >
+        {editingVideoId
+          ? "Update Video"
+          : "Add Video"}
+      </button>
+
+      {editingVideoId && (
+        <button
+          type="button"
+          onClick={() => {
+            setEditingVideoId(null);
+            setVideoForm({
+              video_url: "",
+              description: "",
+            });
+          }}
+          style={{
+            marginLeft: "10px",
+            padding: "10px 20px",
+            border: "1px solid #ccc",
+            borderRadius: "6px",
+            cursor: "pointer",
+          }}
+        >
+          Cancel
+        </button>
+      )}
+    </form>
+
+    <hr style={{ margin: "30px 0" }} />
+
+    <h3>Existing Videos</h3>
+
+    {mediaVideos.length === 0 ? (
+      <p>No videos added yet.</p>
+    ) : (
+      mediaVideos.map((item) => (
+        <div
+          key={item.id}
+          style={{
+            border: "1px solid #ddd",
+            borderRadius: "8px",
+            padding: "18px",
+            marginBottom: "15px",
+            background: "#fff",
+          }}
+        >
+          <h4>
+            {item.description || "Video"}
+          </h4>
+
+          <p>
+            <strong>Video URL:</strong>{" "}
+            {item.video_url}
+          </p>
+
+          <a
+            href={item.video_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-block",
+              marginBottom: "12px",
+              color: "#2563eb",
+            }}
+          >
+            Open Video
+          </a>
+
+          <div>
+            <button
+              onClick={() => editMediaVideo(item)}
+              style={{
+                marginRight: "10px",
+                padding: "8px 15px",
+                cursor: "pointer",
+              }}
+            >
+              Edit
+            </button>
+
+            <button
+              onClick={() => deleteMediaVideo(item.id)}
+              style={{
+                padding: "8px 15px",
+                background: "#dc2626",
+                color: "#fff",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      ))
+    )}
+  </div>
+)}
+    </div>
+  );
+}
 function AdminDashboard() {
   const [activeSection, setActiveSection] =
     useState("dashboard");
@@ -102,6 +1175,7 @@ function AdminDashboard() {
     successStories: "Success Stories",
     statistics: "Project Statistics",
     media: "Project Media",
+    mediaManagement: "Media Management",
   };
 
   // ======================================================
@@ -249,6 +1323,12 @@ function AdminDashboard() {
               setActiveSection("media")
             }
           />
+          <SidebarButton
+  icon="📰"
+  text="Media Management"
+  active={activeSection === "mediaManagement"}
+  onClick={() => setActiveSection("mediaManagement")}
+/>
 
         </div>
 
@@ -354,6 +1434,9 @@ function AdminDashboard() {
           {activeSection === "media" && (
             <ProjectMediaSection />
           )}
+          {activeSection === "mediaManagement" && (
+  <MediaManagementSection />
+)}
 
         </div>
 
@@ -4816,15 +5899,15 @@ const sidebar = {
   width: "270px",
   background: "#1f2937",
   color: "#fff",
-  minHeight: "100vh",
+  height: "100vh",
   position: "fixed",
   left: 0,
   top: 0,
   display: "flex",
   flexDirection: "column",
+  overflow: "hidden",
   zIndex: 1000,
 };
-
 
 const sidebarLogo = {
   padding: "25px 22px",
@@ -4845,14 +5928,12 @@ const logoSubtitle = {
   color: "#cbd5e1",
   fontSize: "13px",
 };
-
-
 const sidebarNavigation = {
   padding: "22px 15px",
-  flex: 1,
-  overflowY: "auto",
+  flex: "1 1 auto",
+  minHeight: 0,
+  overflowY: "scroll",
 };
-
 
 const sidebarButton = {
   width: "100%",
@@ -5509,6 +6590,7 @@ const accessIcon = {
   fontSize: "45px",
   marginBottom: "15px",
 };
+
 
 
 // ======================================================
