@@ -53,6 +53,8 @@ app.use("/api/statistics", statisticsRoutes);
 
 const initiativesRoutes = require("./routes/initiatives");
 app.use("/api/initiatives", initiativesRoutes);
+const projectRoutes = require("./routes/projects");
+app.use("/api/projects", projectRoutes);
 const aboutStoryRoutes = require("./routes/aboutStory");
 app.use("/api/about/story", aboutStoryRoutes);
 
