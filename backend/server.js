@@ -55,6 +55,8 @@ const initiativesRoutes = require("./routes/initiatives");
 app.use("/api/initiatives", initiativesRoutes);
 const projectRoutes = require("./routes/projects");
 app.use("/api/projects", projectRoutes);
+const mediaRoutes = require("./routes/media");
+app.use("/api/media", mediaRoutes);
 const aboutStoryRoutes = require("./routes/aboutStory");
 app.use("/api/about/story", aboutStoryRoutes);
 
