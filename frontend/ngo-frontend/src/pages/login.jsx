@@ -13,6 +13,9 @@ function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // ===============================
+  // HANDLE INPUT CHANGE
+  // ===============================
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -22,9 +25,13 @@ function Login() {
     setError("");
   };
 
+  // ===============================
+  // HANDLE LOGIN
+  // ===============================
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validation
     if (!formData.email || !formData.password) {
       setError("Please enter your email and password.");
       return;
@@ -32,20 +39,26 @@ function Login() {
 
     try {
       setLoading(true);
+      setError("");
 
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
+      // LIVE BACKEND
+      const response = await fetch(
+        "http://localhost:5000/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          }),
+        }
+      );
 
       const data = await response.json();
 
+      // Login failed
       if (!response.ok) {
         setError(data.message || "Login failed.");
         return;
@@ -57,11 +70,20 @@ function Login() {
 
       alert("Login successful!");
 
-      navigate("/account");
+      // ===============================
+      // ADMIN / NORMAL USER REDIRECT
+      // ===============================
+      if (data.user.role === "admin") {
+        navigate("/admin-dashboard");
+      } else {
+        navigate("/account");
+      }
+
     } catch (error) {
-      console.error(error);
+      console.error("Login error:", error);
+
       setError(
-        "Unable to connect to the server. Please make sure the backend is running."
+        "Unable to connect to the server. Please try again later."
       );
     } finally {
       setLoading(false);
@@ -71,69 +93,77 @@ function Login() {
   return (
     <div className="login-page">
 
-      {/* LEFT SIDE */}
-      <div className="login-info">
+      {/* ===============================
+          LEFT SECTION
+      =============================== */}
+      <div className="login-left">
 
-        <Link to="/" className="login-logo">
-          NGO<span>.</span>
-        </Link>
-
-        <div className="login-info-content">
-          <span>WELCOME BACK</span>
-
-          <h1>
-            Together,
-            <br />
-            <strong>We Create Change.</strong>
-          </h1>
+        <div className="login-left-content">
+          <h1>Welcome Back!</h1>
 
           <p>
-            Sign in to stay connected with our initiatives,
-            volunteer opportunities, campaigns and impact.
+            Login to stay connected with our mission and
+            continue making a difference in the community.
           </p>
         </div>
 
       </div>
 
-      {/* RIGHT SIDE */}
-      <div className="login-form-section">
+
+      {/* ===============================
+          RIGHT SECTION
+      =============================== */}
+      <div className="login-right">
 
         <div className="login-card">
 
-          <span className="section-tag">ACCOUNT LOGIN</span>
+          <div className="login-header">
 
-          <h2>Welcome Back</h2>
+            <h2>Login</h2>
 
-          <p className="login-subtitle">
-            Sign in to your account to continue.
-          </p>
+            <p>
+              Welcome back! Please enter your details.
+            </p>
 
+          </div>
+
+
+          {/* ERROR MESSAGE */}
           {error && (
             <div className="login-error">
               {error}
             </div>
           )}
 
+
+          {/* ===============================
+              LOGIN FORM
+          =============================== */}
           <form onSubmit={handleSubmit}>
 
             {/* EMAIL */}
             <div className="form-group">
+
               <label htmlFor="email">
                 Email Address
               </label>
 
               <input
-                id="email"
                 type="email"
+                id="email"
                 name="email"
+                placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter your email"
+                autoComplete="email"
               />
+
             </div>
+
 
             {/* PASSWORD */}
             <div className="form-group">
+
               <label htmlFor="password">
                 Password
               </label>
@@ -141,17 +171,18 @@ function Login() {
               <div className="password-wrapper">
 
                 <input
-                  id="password"
                   type={showPassword ? "text" : "password"}
+                  id="password"
                   name="password"
+                  placeholder="Enter your password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Enter your password"
+                  autoComplete="current-password"
                 />
 
                 <button
                   type="button"
-                  className="show-password"
+                  className="show-password-btn"
                   onClick={() =>
                     setShowPassword(!showPassword)
                   }
@@ -160,15 +191,12 @@ function Login() {
                 </button>
 
               </div>
+
             </div>
 
-            {/* OPTIONS */}
-            <div className="login-options">
 
-              <label>
-                <input type="checkbox" />
-                Remember me
-              </label>
+            {/* FORGOT PASSWORD */}
+            <div className="login-options">
 
               <Link to="/forgot-password">
                 Forgot Password?
@@ -176,31 +204,31 @@ function Login() {
 
             </div>
 
-            {/* SUBMIT */}
+
+            {/* LOGIN BUTTON */}
             <button
               type="submit"
-              className="login-submit"
+              className="login-button"
               disabled={loading}
             >
-              {loading ? "Signing In..." : "Sign In →"}
+              {loading ? "Logging in..." : "Login"}
             </button>
 
           </form>
 
+
           {/* REGISTER */}
-          <div className="login-register">
+          <div className="register-link">
+
             <p>
               Don't have an account?{" "}
+
               <Link to="/register">
-                Create an account
+                Register
               </Link>
             </p>
-          </div>
 
-          {/* BACK HOME */}
-          <Link to="/" className="back-home">
-            ← Back to Website
-          </Link>
+          </div>
 
         </div>
 
